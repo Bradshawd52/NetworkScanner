@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Network Scanner</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 40px;
+      }
+      h1 {
+        color: #333;
+      }
+      input {
+        padding: 5px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+      th,
+      td {
+        padding: 10px;
+        border: 1px solid #ccc;
+        text-align: left;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Network Scanner</h1>
+    <form method="POST">
+      <label>Enter IP Range:</label>
+      <input
+        type="text"
+        name="network"
+        placeholder="e.g. 192.168.0.0/24"
+        value="{{ network }}"
+      />
+      <button type="submit">Scan</button>
+    </form>
+
+    {% if results %}
+    <h2>Results:</h2>
+    <table>
+      <tr>
+        <th>IP Address</th>
+        <th>Open Ports</th>
+      </tr>
+      {% for r in results %}
+      <tr>
+        <td>{{ r.ip }}</td>
+        <td>{{ r.ports | join(', ') }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% endif %}
+  </body>
+</html>
